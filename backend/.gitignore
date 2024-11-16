@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+
+# Django stuff:
+db.sqlite3
+*.log
+*.pot
+*.pyc
+media/
+staticfiles/
+*.sqlite3
+
+# dotenv
+.env
+
+# react node_modules
+node_modules/
+build/
+.cache/
+.npm/
+
+# Ignore local editor settings
+.idea/
+.vscode/
+*.swp

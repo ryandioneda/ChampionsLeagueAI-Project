@@ -1,0 +1,22 @@
+# Exclude sensitive files
+.env
+*.pem
+*.key
+
+# Exclude version control files
+.git
+.gitignore
+
+# Exclude temporary and cache files
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Exclude local development tools and settings
+.vscode/
+.idea/
+.DS_Store
+node_modules/
