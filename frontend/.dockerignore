@@ -1,0 +1,29 @@
+# Node modules and dependency folders
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# Build output
+build/
+.next/
+out/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# Logs
+*.log
+
+# Editor settings and project files
+.vscode/
+.idea/
+.DS_Store
+
+# Other
+.git/
+.gitignore
