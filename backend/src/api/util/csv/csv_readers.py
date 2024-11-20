@@ -1,30 +1,20 @@
 import pandas as pd
+import os
 
-# Define the relative path to the CSV file
-UCL_AllTime_Performance_Table_csv = "../../datasets/champions-league-dataset/UCL_AllTime_Performance_Table.csv"
-UCL_history_Finals_csv = "../../datasets/champions-league-dataset/UCL_Finals_1955-2023.csv"
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+UCL_allTime_performance_table_csv = os.path.join(
+    root_dir,
+    'datasets', 'champions-league-dataset', 'UCL_AllTime_Performance_Table.csv'
+)
 
-def read_UCL_history_finals_csv(file_path):
+UCL_history_finals_csv = os.path.join(
+    root_dir,
+    'datasets', 'champions-league-dataset', 'UCL_Finals_1955-2023.csv'
+)
+     
+def read_csv(file_path):
     """
-    Reads the UCL finals 1995 - 2023 CSV file
-    
-    Args:
-        file_path (str): Path to the CSV file.
-        
-    Returns:
-        dataframe: A pd dataframe of the CSV data
-    """
-    try:
-        dataframe = pd.read_csv(file_path)
-        return dataframe
-    except FileNotFoundError:
-        print(f"Error: the file at {file_path} was not found")
-    except Exception as e:
-        print(f"An error occured: {e}")
-        
-def read_UCL_history_performance_csv(file_path):
-    """
-    Reads the UCL all-time performance 1995 - 2023 CSV file
+    Reads a CSV file
     
     Args:
         file_path (str): Path to the CSV file.
@@ -156,5 +146,3 @@ def parse_UCL_history_performance_data(dataframe):
     except Exception as e:
         print(f"An unexpected error occured: {e}")    
     return pd.DataFrame()    
-
-    
