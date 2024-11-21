@@ -1,34 +1,4 @@
 import pandas as pd
-import os
-
-root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-UCL_allTime_performance_table_csv = os.path.join(
-    root_dir,
-    'datasets', 'champions-league-dataset', 'UCL_AllTime_Performance_Table.csv'
-)
-
-UCL_history_finals_csv = os.path.join(
-    root_dir,
-    'datasets', 'champions-league-dataset', 'UCL_Finals_1955-2023.csv'
-)
-     
-def read_csv(file_path):
-    """
-    Reads a CSV file
-    
-    Args:
-        file_path (str): Path to the CSV file.
-        
-    Returns:
-        dataframe: A pd dataframe of the CSV data
-    """
-    try:
-        dataframe = pd.read_csv(file_path)
-        return dataframe
-    except FileNotFoundError:
-        print(f"Error: the file at {file_path} was not found")
-    except Exception as e:
-        print(f"An error occured: {e}")
         
 def parse_UCL_history_finals_data(dataframe):
     """
@@ -113,7 +83,11 @@ def parse_UCL_history_performance_data(dataframe):
         pd.DataFrame: A processed dataframe with columns for the listed features.
     """
     try:
-        relevant_columns = ['Team', 'M.', 'W', 'D', 'L', 'goals']
+        if '#' in dataframe.columns:
+            dataframe.rename(columns={'#': 'Rank'}, inplace=True)
+        dataframe['Rank'] = pd.to_numeric(dataframe['Rank'], errors='coerce').fillna(0).astype(int)
+        
+        relevant_columns = ['Rank', 'Team', 'M.', 'W', 'D', 'L', 'goals']
         
         if not all(col in dataframe.columns for col in relevant_columns):
             raise ValueError(f"UCL performance history dataframe is missing one or more required columns: {relevant_columns}")
@@ -130,6 +104,7 @@ def parse_UCL_history_performance_data(dataframe):
         dataframe['Goals Against'] = pd.to_numeric(split_goals[1], errors='coerce').fillna(0).astype(int)
         
         dataframe = dataframe.drop(columns=['goals'])
+        
         
         dataframe.rename(columns={
             'M.': 'Matches Played',
